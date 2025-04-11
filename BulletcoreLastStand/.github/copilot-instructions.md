@@ -2,7 +2,7 @@
 - Project name: BulletcoreLastStand
 - Unity version: Unity 2022.3.3f1
 - Active game object:
-  - Name: PlayerCam
-  - Tag: MainCamera
+  - Name: Floor
+  - Tag: Untagged
   - Layer: Default
 <!-- UNITY CODE ASSIST INSTRUCTIONS END -->
