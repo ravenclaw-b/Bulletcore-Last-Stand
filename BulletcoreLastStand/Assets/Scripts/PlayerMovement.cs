@@ -33,17 +33,16 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        isGrounded = Physics.Raycast(transform.position, Vector3.down, (playerHeight * 0.5f) + 0.2f, whatIsGround);
         ProcessInput();
 
         if (isGrounded)
         {
             rb.drag = groundDrag;
-            Debug.Log("grounded");
         }
         else
         {
             rb.drag = 0;
+            // Debug.Log("Not grounded");
         }
 
     }
@@ -63,5 +62,13 @@ public class PlayerMovement : MonoBehaviour
     {
         moveDirection = orientation.forward * verticalInput + orientation.right * horizontalInput;
         rb.AddForce(moveDirection.normalized * moveSpeed * 10f, ForceMode.Force);
+    }
+
+    void OnCollisionStay(Collision info)
+    {
+        if (info.gameObject.layer == 6)
+        {
+            isGrounded = true;
+        }
     }
 }
