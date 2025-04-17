@@ -44,6 +44,10 @@ public class PlayerMovement : MonoBehaviour
         ProcessInput();
         SpeedControl();
 
+        Vector3 origin = new Vector3(transform.position.x, transform.position.y + 0.1f, transform.position.z);
+
+        isGrounded = Physics.Raycast(origin, Vector3.down, 0.15f, whatIsGround);
+
         if (isGrounded)
             rb.drag = groundDrag;
         else
@@ -109,13 +113,5 @@ public class PlayerMovement : MonoBehaviour
     private void ResetJump()
     {
         readyToJump = true;
-    }
-
-    void OnCollisionStay(Collision info)
-    {
-        if (info.gameObject.layer == 6)
-        {
-            isGrounded = true;
-        }
     }
 }
