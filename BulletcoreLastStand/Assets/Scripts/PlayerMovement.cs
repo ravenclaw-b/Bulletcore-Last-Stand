@@ -84,18 +84,29 @@ public class PlayerMovement : MonoBehaviour
         // on slope
         if (onSlope())
         {
-            rb.AddForce(GetSlopeMoveDirection() * moveSpeed * 20f, ForceMode.Force);
-
-            if (rb.velocity.y > 0)
+            if (horizontalInput == 0 && verticalInput == 0) // No input (not moving)
             {
-                rb.AddForce(Vector3.down * 80f, ForceMode.Force);
+                rb.velocity = new Vector3(0f, 0f, 0f); // Set horizontal velocity to zero but keep vertical (y) velocity
+            }
+            else
+            {
+                // Move according to the slope
+                rb.AddForce(GetSlopeMoveDirection() * moveSpeed * 20f, ForceMode.Force);
+
+                if (rb.velocity.y > 0)
+                {
+                    rb.AddForce(Vector3.down * 80f, ForceMode.Force); // prevent floating upward
+                }
             }
         }
 
         // on ground
-        if (isGrounded)
+        else if (isGrounded)
         {
-            rb.AddForce(moveDirection.normalized * moveSpeed * 10f, ForceMode.Force);
+            if (horizontalInput != 0 || verticalInput != 0) // If there is input
+            {
+                rb.AddForce(moveDirection.normalized * moveSpeed * 10f, ForceMode.Force);
+            }
         }
 
         // in air
@@ -106,7 +117,10 @@ public class PlayerMovement : MonoBehaviour
 
         // turn gravity off on slope
         rb.useGravity = !onSlope();
+
+        Debug.Log(onSlope());
     }
+
 
     private void SpeedControl()
     {
