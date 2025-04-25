@@ -117,8 +117,6 @@ public class PlayerMovement : MonoBehaviour
 
         // turn gravity off on slope
         rb.useGravity = !onSlope();
-
-        Debug.Log(onSlope());
     }
 
 
