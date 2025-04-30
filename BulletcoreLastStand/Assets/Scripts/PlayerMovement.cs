@@ -35,11 +35,16 @@ public class PlayerMovement : MonoBehaviour
 
     Rigidbody rb;
 
+    PlayerHealth playerHealth;
+
+
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody>();
         rb.freezeRotation = true;
+
+        playerHealth = GetComponent<PlayerHealth>();
     }
 
     // Update is called once per frame
