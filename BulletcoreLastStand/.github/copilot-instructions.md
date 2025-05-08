@@ -2,7 +2,7 @@
 - Project name: BulletcoreLastStand
 - Unity version: Unity 2022.3.3f1
 - Active game object:
-  - Name: WeaponHolder
+  - Name: Hand
   - Tag: Untagged
-  - Layer: Default
+  - Layer: Hands
 <!-- UNITY CODE ASSIST INSTRUCTIONS END -->

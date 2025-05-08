@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class PlayerHealth : MonoBehaviour
 {
-    int health = 100;
+    public int health = 100;
     bool isAlive = true;
 
     // Start is called before the first frame update
