@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class HealthUI : MonoBehaviour
 {
-    public PlayerHealth playerHealth;
+    public Health playerHealth;
 
     // Start is called before the first frame update
     void Start()
@@ -15,7 +15,7 @@ public class HealthUI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.localScale = new Vector3((3f*playerHealth.GetPlayerHealth())/100, transform.localScale.y, transform.localScale.z);
+        transform.localScale = new Vector3((3f*playerHealth.GetHealth())/100, transform.localScale.y, transform.localScale.z);
     }
 }
     

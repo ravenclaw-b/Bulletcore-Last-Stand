@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Gun : MonoBehaviour
 {
-    [SerializeField] private int shotsPerSecond = 5;
+    [SerializeField] private int shotsPerSecond = 10;
     private double shotDelay;
     private long lastShot;
 
@@ -14,6 +14,8 @@ public class Gun : MonoBehaviour
     [SerializeField] private float recoilX = 2f;
     [SerializeField] private float recoilY = 0.5f;
     [SerializeField] private float recoilZ = 0.2f;
+
+    float forceMagnitude = 1000f;
 
     private void Start()
     {
@@ -39,7 +41,25 @@ public class Gun : MonoBehaviour
             {
                 if (hit.collider != null)
                 {
-                    Debug.Log(hit.collider.gameObject.name);
+                    Health hitHealth = hit.collider.gameObject.GetComponentInParent<Health>();
+                    if (hitHealth != null)
+                    {
+                        string tag = hit.collider.gameObject.tag;
+                        float multi = tag == "Head" ? 2 : 1;
+
+                        hitHealth.Damage(14f * multi);
+                        Debug.Log("hit " + hit.collider.gameObject.name + " with tag: " + tag + ". Health is now at " + hitHealth.GetHealth() + ".");
+
+                        if (!hitHealth.IsAlive() && hit.rigidbody != null && !hit.rigidbody.isKinematic)
+                        {
+                            Vector3 forceDirection = playerCam.forward;
+                            hit.rigidbody.AddForceAtPosition(forceDirection * forceMagnitude, hit.point);
+                        }
+                    }
+                    else
+                    {
+                        Debug.Log("hit " + hit.collider.gameObject.name + " but no health found.");
+                    }
                 }
             }
 
