@@ -17,7 +17,6 @@ public class GameState : MonoBehaviour
 
     public int enemiesToSpawn = 5;
     public int enemiesSpawned = 0;
-    private bool bossSpawned = false;
 
     private List<GameObject> aliveEnemies = new List<GameObject>();
 
@@ -52,7 +51,7 @@ public class GameState : MonoBehaviour
             {
                 StartNewWave();
             }
-            playerHealth.health = Mathf.Min(playerHealth.totalHealth, playerHealth.health + 1);
+            playerHealth.health = Mathf.Min(playerHealth.totalHealth, playerHealth.health + 0.1f);
             return;
         }
 
@@ -62,16 +61,21 @@ public class GameState : MonoBehaviour
         if (enemiesSpawned < enemiesToSpawn && Time.time - lastSpawned >= spawnDelay)
         {
             lastSpawned = Time.time;
-            SpawnEnemy(false);
+            float bossRandom = Random.Range(0f, 1f);
+            float bossChance = 0.03f + wave * 0.015f;
+
+            if (bossChance >= bossRandom)
+            {
+                SpawnEnemy(true);
+            }
+            else
+            {
+                SpawnEnemy(false);
+            }
+            
         }
 
-        if (!bossSpawned && wave % 3 == 0 && enemiesSpawned == enemiesToSpawn)
-        {
-            SpawnEnemy(true); // Spawn boss
-            bossSpawned = true;
-        }
-
-        if (enemiesAlive == 0 && enemiesSpawned == enemiesToSpawn && (!bossSpawned || (bossSpawned && enemiesAlive == 0)))
+        if (enemiesAlive == 0 && enemiesSpawned == enemiesToSpawn)
         {
             isBetweenWaves = true;
             timeUntilNextWave = waveDelay;
@@ -82,10 +86,8 @@ public class GameState : MonoBehaviour
     {
         wave++;
         enemiesToSpawn = 5 + wave * 2;
-        if (wave % 3 == 0) enemiesToSpawn -= 3; // fewer enemies in boss wave
 
         enemiesSpawned = 0;
-        bossSpawned = false;
         isBetweenWaves = false;
         lastSpawned = Time.time - spawnDelay;
     }
@@ -99,13 +101,14 @@ public class GameState : MonoBehaviour
         BasicEnemyMovement spawnedMove = spawned.GetComponent<BasicEnemyMovement>();
         BasicEnemyDamage spawnedDamage = spawned.GetComponent<BasicEnemyDamage>();
 
+        spawnedHealth.gameState = gameObject.GetComponent<GameState>();
+
         if (isBoss)
         {
             spawned.transform.localScale *= 2f;
             spawnedHealth.totalHealth = 500 + wave * 50;
-            spawnedMove.speed = 3f;
+            spawnedMove.speed = 3f + 0.3f  * wave;
             spawnedDamage.damage = 20f + wave * 2f;
-            bossSpawned = true;
         }
         else
         {

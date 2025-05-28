@@ -17,6 +17,9 @@ public class Health : MonoBehaviour
     [SerializeField] private GameObject head;
     [SerializeField] private GameObject body;
 
+    [SerializeField] private GameObject scrap;
+    [SerializeField] public GameState gameState;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -67,6 +70,20 @@ public class Health : MonoBehaviour
 
         if (CompareTag("Enemy"))
         {
+            GameObject spawnedScrap = Instantiate(scrap, gameObject.transform.position, gameObject.transform.rotation);
+            Rigidbody spawnedRb = spawnedScrap.GetComponent<Rigidbody>();
+            ScrapValue scrapValue = spawnedScrap.GetComponent<ScrapValue>();
+
+            if(scrapValue != null && gameState != null)
+            {
+                scrapValue.value = gameState.wave;
+            }
+
+            if (spawnedRb != null)
+            {
+                spawnedRb.velocity = rb.velocity;
+            }
+
             if (rb != null)
             {
                 rb.freezeRotation = false;
@@ -94,6 +111,8 @@ public class Health : MonoBehaviour
                     bodyRb.mass = 1.5f;
                 }
             }
+
+
         }
         else if (CompareTag("Player"))
         {

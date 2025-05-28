@@ -17,9 +17,9 @@ TagManager:
   - Ground
   - Hands
   - Head
-  - 
-  - 
-  - 
+  - Player
+  - Item
+  - Pickup
   - 
   - 
   - 
