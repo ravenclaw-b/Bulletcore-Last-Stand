@@ -6,6 +6,8 @@ using UnityEngine.SceneManagement;
 public class Health : MonoBehaviour
 {
     public float health = 100f;
+    public float totalHealth = 100f;
+
     bool isAlive = true;
 
     float timeDied;
@@ -25,7 +27,7 @@ public class Health : MonoBehaviour
     void Update()
     {
         float currentTime = Time.time;
-        if (!isAlive && currentTime - timeDied > secondsToDelete)
+        if (!isAlive && (currentTime - timeDied > secondsToDelete) && CompareTag("Enemy"))
         {
             Destroy(head);
             Destroy(body);
@@ -61,15 +63,15 @@ public class Health : MonoBehaviour
         isAlive = false;
         timeDied = Time.time;
 
-        if (rb != null)
-        {
-            rb.freezeRotation = false;
-        }
-
         Debug.Log(transform.gameObject.name + " died");
 
         if (CompareTag("Enemy"))
         {
+            if (rb != null)
+            {
+                rb.freezeRotation = false;
+            }
+
             // Detach and apply physics to head
             if (head != null)
             {

@@ -48,7 +48,7 @@ public class Gun : MonoBehaviour
                         float multi = tag == "Head" ? 2 : 1;
 
                         hitHealth.Damage(14f * multi);
-                        Debug.Log("hit " + hit.collider.gameObject.name + " with tag: " + tag + ". Health is now at " + hitHealth.GetHealth() + ".");
+                        // Debug.Log("hit " + hit.collider.gameObject.name + " with tag: " + tag + ". Health is now at " + hitHealth.GetHealth() + ".");
 
                         if (!hitHealth.IsAlive() && hit.rigidbody != null && !hit.rigidbody.isKinematic)
                         {
@@ -58,7 +58,7 @@ public class Gun : MonoBehaviour
                     }
                     else
                     {
-                        Debug.Log("hit " + hit.collider.gameObject.name + " but no health found.");
+                        // Debug.Log("hit " + hit.collider.gameObject.name + " but no health found.");
                     }
                 }
             }

@@ -11,9 +11,12 @@ GameObject:
   - component: {fileID: 3378505826030610509}
   - component: {fileID: 382978694286464379}
   - component: {fileID: 256002010287803857}
+  - component: {fileID: 4933567337514160298}
+  - component: {fileID: 3707180235016358584}
+  - component: {fileID: 5277153759797534024}
   m_Layer: 0
   m_Name: BasicEnemy
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -48,6 +51,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 100
+  head: {fileID: 2505408162312338052}
+  body: {fileID: 4784445770318136780}
 --- !u!54 &256002010287803857
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -57,7 +62,7 @@ Rigidbody:
   m_GameObject: {fileID: 162345627868702319}
   serializedVersion: 4
   m_Mass: 1
-  m_Drag: 0
+  m_Drag: 1
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
@@ -75,6 +80,45 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
+--- !u!114 &4933567337514160298
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 162345627868702319}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c22950737ed6d2499025dfc874c72da, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 0}
+  speed: 5
+--- !u!114 &3707180235016358584
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 162345627868702319}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f64f67f8d1b4c9649b1e72207fcb6c28, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &5277153759797534024
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 162345627868702319}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57989ae280b6e6948a04cd29c457a41c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startEnemyMat: {fileID: 2100000, guid: a1630f8ea6242584aa86217fa316c3f0, type: 2}
 --- !u!1 &2505408162312338052
 GameObject:
   m_ObjectHideFlags: 0
