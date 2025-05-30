@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 public class GameState : MonoBehaviour
 {
     public GameObject player;
-    public int wave = 1;
+    public int wave = 0;
     public int enemiesAlive = 0;
     public float timeUntilNextWave = 0f;
     public bool isBetweenWaves = false;

@@ -13,6 +13,8 @@ public class PlayerInventory : MonoBehaviour
             if (pickupValue != null)
             {
                 scraps += pickupValue.value;
+                pickupValue.value = 0;
+
                 Destroy(other.gameObject);
             }
         }
